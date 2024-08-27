@@ -1,0 +1,69 @@
+﻿@using System.Security.Claims;
+@{
+    int Id = Convert.ToInt32(User.FindFirst(ClaimTypes.Sid)?.Value);
+    string Name = User.FindFirst(ClaimTypes.Name)?.Value!;
+    string Avatar(string Avatar)
+    {
+        if (Avatar != null)
+        {
+            return $"data:image/png;base64, {Avatar}";
+        }
+        return "/img/defaultAvatar.png";
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BBS</title>
+    <link rel="stylesheet" href="~/_Layout.css">
+    <link rel="stylesheet" href="~/richtexteditor/rte_theme_default.css" />
+    <script type="text/javascript" src="~/richtexteditor/rte.js"></script>
+    <script type="text/javascript" src="~/richtexteditor/plugins/all_plugins.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="navbar">
+            <a href="/">Home</a>
+            <a href="/1">Post</a>
+        </div>
+        <!--<div id="search">
+            <input type="text" id="searchbox" placeholder="title">
+            <select id="searchOptions">
+                <option value="title">Title</option>
+                <option value="content">Content</option>
+                <option value="author">Author</option>
+                <option value="tag">Tag</option>
+            </select>
+            <button id="searchBtn">Search</button>
+        </div>-->
+        <div id="user">
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <a id="userlink" class="@Id" asp-controller="User" asp-action="UserCenter">Hello! @(Name)</a>
+                <a href="/Chat/Index">Chat</a>
+                <a href="/Logout">Logout</a>
+                <a id="Chat" href="">ChatWindow</a>
+            }
+            else
+            {
+                <a asp-controller="User" asp-action="Index">Login/Signup</a>
+            }
+        </div>
+    </header>
+    <main>
+        <br>
+        @RenderBody()
+        <br>
+        <br>
+    </main>
+    <footer>example footer</footer>
+    <script src="~/_Layout.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    @*<script src="~/ChatRoomWindow.js" defer></script>*@
+</body>
+
+</html>

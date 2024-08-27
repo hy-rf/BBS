@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+    font-family: sans-serif;
+}
+
+:root {
+    --header-height: 1.35rem;
+    --main-height: 90%;
+    --footer-height: 5%;
+    --home-page-width: 95%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+html {
+    /*    min-height: 100%;*/
+}
+
+
+body {
+    position: absolute;
+    left: 2.5%;
+    width: var(--home-page-width);
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    scrollbar-width: 0;
+    background-color: wheat;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    height: var(--header-height);
+    width: var(--home-page-width);
+    align-self: center;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    transition: 0.5s;
+    z-index: 99;
+    background-color: lightgrey;
+    backdrop-filter: blur(5px);
+}
+
+#navbar {
+    position: absolute;
+    left: 1rem;
+}
+
+#search {
+    position: absolute;
+    right: 11rem;
+}
+
+    #search > * {
+        font-size: 0.8rem;
+        height: 1.1rem;
+    }
+
+#searchOptions > * {
+    font-size: 0.8rem;
+    height: 1.1rem;
+}
+
+#user {
+    position: absolute;
+    right: 1rem;
+    border-radius: 5px;
+}
+
+
+
+#UserMenu {
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+}
+
+.usermenu_show {
+    display: block;
+}
+
+.header_hide {
+    position: fixed;
+    top: calc(var(--header-height)*-1);
+    transition: 0.5s;
+}
+
+main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    overflow: hidden;
+}
+
+
+script {
+    visibility: hidden;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+
+.PostUnit > * {
+    margin: 0.5rem;
+}
+
+
+#User > * > * {
+    margin: 0.5rem;
+}
+
+
+.ChatWindow {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    background-color: wheat;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 20rem;
+    width: 20rem;
+    border: 1px solid black;
+    border-top-left-radius: 0.5rem;
+    resize: none;
+    z-index: 99;
+}

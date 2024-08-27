@@ -1,0 +1,22 @@
+﻿@using BBS.Models;
+<link rel="stylesheet" href="~/Post.css">
+@foreach(var item in Model)
+{
+    <div class="PostUnit">
+        <a asp-controller="Post" asp-action="GetPost" asp-route-Id="@item.Post.Id">Title : @item.Post.Title</a>
+        <div class="UserInfo">
+            <p>@item.Post.UserId</p>
+            <a href="/User/@item.Post.UserId">@item.Post.User.Name</a>
+            <img src="data:image/png;base64, @item.Post.User.Avatar" width="64" height="64">
+        </div>
+        
+        <p class="timeIndicator">
+            <span>Date Created : @item.Post.Created.ToString("hh:mm yy/MM/dd")</span>
+            <span>Date Modified : @item.Post.Modified.ToString("hh:mm yy/MM/dd")</span>
+        </p>
+    </div>
+    <br>
+
+}
+
+
