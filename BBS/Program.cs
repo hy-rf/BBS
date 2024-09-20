@@ -46,7 +46,7 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddDbContextPool<AppDbContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("LocalDB"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDB"));
 });
 
 
