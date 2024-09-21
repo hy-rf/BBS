@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 if (!builder.Environment.IsDevelopment())
 {
+    var db = Environment.GetEnvironmentVariable("INSTANCE_CONNECTION_NAME");
+    Console.WriteLine(db);
     var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
     var url = $"http://0.0.0.0:{port}";
     builder.WebHost.UseUrls(url);
