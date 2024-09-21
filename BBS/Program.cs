@@ -11,9 +11,13 @@ using BBS.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-var url = $"http://0.0.0.0:{port}";
-builder.WebHost.UseUrls(url);
+if (!builder.Environment.IsDevelopment())
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    var url = $"http://0.0.0.0:{port}";
+    builder.WebHost.UseUrls(url);
+}
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
@@ -29,7 +33,7 @@ builder.Services.AddAuthentication(opt =>
         {
             ValidateIssuer = false,
             ValidateAudience = false,
-            ValidateIssuerSigningKey =true,
+            ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWT")!))
         };
         options.Events = new JwtBearerEvents
