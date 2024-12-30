@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.SignalR;
 using BBS.Hubs;
 
 
@@ -56,7 +55,7 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddDbContextPool<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDB"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
 });
 
 
