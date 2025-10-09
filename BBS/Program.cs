@@ -38,7 +38,7 @@ builder.Services.AddAuthentication(opt =>
         {
             ValidateIssuer = false,
             ValidateAudience = false,
-            ValidateIssuerSigningKey = true,
+            ValidateIssuerSigningKey = false,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWT")!))
         };
         options.Events = new JwtBearerEvents
@@ -81,4 +81,4 @@ app.MapControllers();
 
 app.MapHub<ChatRoom>("/chat");
 
-app.Run();
+await app.RunAsync();

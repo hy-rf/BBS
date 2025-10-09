@@ -40,11 +40,15 @@ namespace BBS.Services
         {
             try
             {
-                var Matched = ctx.User.First(u => u.Name == Name && u.Pwd == Pwd);
+                User Matched = ctx.User.Where(u => u.Name == Name && u.Pwd == Pwd).Select(u => new User
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Pwd = u.Pwd,
+                }).First();
                 if (Matched != null)
                 {
-                    var updateLastLogin = ctx.User.Single(u => u.Id == Matched.Id);
-                    updateLastLogin.LastLogin = DateTime.Now;
+                    Matched.LastLogin = DateTime.Now;
                     id = Matched.Id;
                     ctx.SaveChanges();
                     return true;
@@ -60,8 +64,8 @@ namespace BBS.Services
         }
         public User GetUser(int Id)
         {
-            var User = ctx.User.Include(u => u.Posts).Include(u => u.Replies).FirstOrDefault(u => u.Id == Id);
-            return User;
+            User user = ctx.User.Include(u => u.Posts).Include(u => u.Replies).FirstOrDefault(u => u.Id == Id);
+            return user;
         }
         public bool EditAvatar(int Id, string Avatar)
         {
