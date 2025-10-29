@@ -41,16 +41,17 @@ namespace BBS.Controllers
         [Route("Chat/CreateChatRoom")]
         public ActionResult CreateChatRoom(string Name)
         {
-            var newchatroom = new Models.ChatRoom
+            var newChatRoom = new ChatRoom
             {
                 Name = Name
             };
-            chatService.CreateChatRoom(newchatroom);
-            chatService.AddMember(new Models.ChatRoomMember
+            chatService.CreateChatRoom(newChatRoom);
+            ChatRoomMember newChatRoomMember = new ChatRoomMember
             {
-                ChatRoomId = newchatroom.Id,
+                ChatRoomId = newChatRoom.Id,
                 UserId = Convert.ToInt32(User.FindFirst(ClaimTypes.Sid)?.Value)
-            });
+            };
+            chatService.AddMember(newChatRoomMember);
             return Redirect("/Chat/Index");
         }
         [HttpPost]
